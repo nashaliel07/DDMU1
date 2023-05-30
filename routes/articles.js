@@ -75,7 +75,7 @@ router.get("/:id", (req, res) => {
   }
   res.send(article);
 });
-
+//post
 router.post("/", (req, res) => {
   try {
     console.log(req.body);
