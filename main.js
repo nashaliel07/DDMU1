@@ -3,22 +3,42 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const low = require("lowdb");
+const articlesRoutes = require("./routes/articles");
 
-const port =process.env.PORT || 8081;
+//set port
+const port = process.env.PORT || 8080;
+//get db file
+const FileSync = require("lowdb/adapters/FileSync");
 
-const FilleSync = require("lowdb/adapters/FileSync");
-
-const adapter = new FilleSync("db.json");
+const adapter = new FileSync("./db.json");
 const db = low(adapter);
 
-db.defaults({ articles: []}).write();
+// Agregado para verificar la instancia
+
+db.defaults({ articles: [] }).write();
 
 const app = express();
 
 app.db = db;
 
-app.use(cors())
+const options = {
+  openapi: "3.0.0",
+  info: {
+    title: "Article Api - CERTUS",
+    version: "0.0.1",
+    description: "Demo Api for sales",
+  },
+  servers: [
+    {
+      url: "http://localhost:" + port,
+    },
+  ],
+  apis: ["./routes/*.js"],
+};
+
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use("/api/articles", articlesRoutes);
 
-app.listen(port,()=> console.log('App is running!!!!! ',port));
+app.listen(port, () => console.log("NCD: listening on port " + port));
