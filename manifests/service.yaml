@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: certus-api-kb01
+  namespace: namespace-workflow-1688319634824
+spec:
+  type: LoadBalancer
+  selector:
+    app: certus-api-kb01
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
