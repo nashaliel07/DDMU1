@@ -1,6 +1,6 @@
 const { Schema, model } = require("monngoose");
 
-const ArticleSchema = Schema({
+const loginSchema = Schema({
   username: {
     type: String,
     required: [true, "Email requerido"],
@@ -12,4 +12,4 @@ const ArticleSchema = Schema({
   },
 });
 
-module.exports = model("article", ArticleSchema);
+module.exports = model("user", loginSchema);
