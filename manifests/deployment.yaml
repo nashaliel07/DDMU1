@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: certus-api-kb01
+  labels:
+    app: certus-api-kb01
+  namespace: namespace-workflow-1688319634824
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: certus-api-kb01
+  template:
+    metadata:
+      labels:
+        app: certus-api-kb01
+    spec:
+      containers:
+        - name: certus-api-kb01
+          image: acrworkflow1688319634824.azurecr.io/image-workflow-1688319634824:latest
+          ports:
+            - containerPort: 8080
